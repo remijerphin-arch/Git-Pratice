@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Surprise • Sanshiiii</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Sacramento&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="loader" class="loader">
+      <div class="loader-heart">❤</div>
+      <p>Setting up your surprise...</p>
+    </div>
+
+    <button id="musicToggle" class="music-toggle" aria-label="Toggle background music">
+      🎵 Music: On
+    </button>
+
+    <audio id="bgMusic" loop>
+      <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_c7d8d5ecfd.mp3?filename=emotional-piano-ambient-126153.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="celebrationSound">
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_274da09f29.mp3?filename=small-crowd-applause-6695.mp3" type="audio/mpeg" />
+    </audio>
+
+    <main id="app" class="app hidden">
+      <section class="page active" data-page="1">
+        <div class="floating-hearts" id="heartsPage1"></div>
+        <div class="content center">
+          <h1 id="typingText" class="typing"></h1>
+          <button class="next-btn" data-next="2">Next →</button>
+        </div>
+      </section>
+
+      <section class="page" data-page="2">
+        <div class="sparkles" id="sparklesPage2"></div>
+        <div class="content story-box">
+          <h2>How It All Started...</h2>
+          <p class="reveal-text">
+            First I saw you in online class… and I got a crush on you.<br />
+            Then I started messaging you in Zoom and somehow got your Instagram ID.<br />
+            From that day, I started texting you.<br />
+            One sudden day, I think June 7… I proposed.<br />
+            That time your Instagram ID was blackheart 🤣<br />
+            And you rejected me.<br />
+            My bad… I even thought why I proposed to this face 😂<br />
+            But that’s not the matter here…<br /><br />
+            From that moment, our friendship road started.<br />
+            And honestly, that friendship became more beautiful than anything else.<br /><br />
+            We fight for no serious reason.<br />
+            I blocked you 100 times.<br />
+            Unblocked you 100 times.<br />
+            But still… we are here.<br /><br />
+            That’s something amazing.<br />
+            That’s something rare.<br />
+            That’s something called REAL FRIENDSHIP.
+          </p>
+          <button class="next-btn" data-next="3">Next →</button>
+        </div>
+      </section>
+
+      <section class="page" data-page="3">
+        <div class="balloons" id="balloons"></div>
+        <canvas id="confettiCanvas"></canvas>
+        <div class="content center">
+          <h2 class="glow-title">Wish you many more happy returns of the day Sanshiiii ❤️🎂✨</h2>
+          <p class="doodles">💖 ✨ 🌟 💫 🤍 💜 🎉</p>
+          <button class="next-btn" data-next="4">Next Surprise →</button>
+        </div>
+      </section>
+
+      <section class="page" data-page="4">
+        <div class="content cards-content">
+          <h2>Greeting Card Vault 💌</h2>
+          <p class="cards-sub">Tap any card to open a surprise note.</p>
+          <div class="cards-grid" id="cardsGrid"></div>
+          <button class="next-btn" data-next="5">See Full Surprise →</button>
+        </div>
+      </section>
+
+      <section class="page" data-page="5">
+        <div class="content center payment-box">
+          <h2>To unlock the final surprise, you must pay ₹10 😌</h2>
+          <div class="gpay-card">
+            <div class="gpay-header">G Pay</div>
+            <p><strong>UPI ID:</strong> remijerphin-1@oksbi</p>
+          </div>
+          <button class="next-btn" data-next="6">Pay & Continue</button>
+        </div>
+      </section>
+
+      <section class="page final-page" data-page="6">
+        <div class="floating-hearts" id="heartsPage6"></div>
+        <canvas id="fireworksCanvas"></canvas>
+        <div class="content center">
+          <h2 class="scam-text">YOU GOT SCAMMED MY BUDDY 🤣🤣🤣</h2>
+          <p>
+            But seriously…<br />
+            You are one of the best things that happened in my life.<br />
+            Thank you for staying.<br />
+            Thank you for tolerating me.<br />
+            Thank you for 5 unforgettable years.<br /><br />
+            Happy Birthday once again Sanshiiii ❤️
+          </p>
+          <div class="final-glow">Forever Friends 💫</div>
+          <div id="countdown" class="countdown"></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="cardModal" class="lightbox hidden" role="dialog" aria-modal="true">
+      <button id="cardModalClose" class="close-lightbox">×</button>
+      <div class="card-modal-content">
+        <h3 id="cardModalTitle"></h3>
+        <p id="cardModalMessage"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
