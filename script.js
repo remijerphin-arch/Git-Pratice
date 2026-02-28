@@ -1,6 +1,5 @@
 const loader = document.getElementById('loader');
 const app = document.getElementById('app');
-const pages = [...document.querySelectorAll('.page')];
 const nextButtons = document.querySelectorAll('.next-btn');
 const typingText = document.getElementById('typingText');
 const bgMusic = document.getElementById('bgMusic');
@@ -11,26 +10,36 @@ const fireworksCanvas = document.getElementById('fireworksCanvas');
 
 const welcomeLine = 'Thank you for 5 years of beautiful friendship ❤️';
 
-const photoData = [
+const greetingCards = [
   {
-    src: 'https://picsum.photos/seed/friendship1/600/900',
-    quote: 'Best friends are not perfect, but they are always real.'
+    title: 'Card 1 • Real Friendship',
+    short: 'Best friends are not perfect, but they are always real.',
+    long: 'No matter how messy life gets, this friendship always finds its way back to laughter, comfort, and pure honesty.'
   },
   {
-    src: 'https://picsum.photos/seed/friendship2/600/900',
-    quote: 'Some friendships are written by destiny.'
+    title: 'Card 2 • Destiny Note',
+    short: 'Some friendships are written by destiny.',
+    long: 'Out of all people, timelines, and moments, we met—and that single coincidence became one of life’s best gifts.'
   },
   {
-    src: 'https://picsum.photos/seed/friendship3/600/900',
-    quote: '5 years… and still counting.'
+    title: 'Card 3 • 5-Year Magic',
+    short: '5 years… and still counting.',
+    long: 'Five years of random calls, silly fights, dramatic block-unblock cycles, and countless memories worth keeping forever.'
   },
   {
-    src: 'https://picsum.photos/seed/friendship4/600/900',
-    quote: 'From crush to chaos partner.'
+    title: 'Card 4 • Chaos Partner',
+    short: 'From crush to chaos partner.',
+    long: 'Some stories begin unexpectedly; ours turned into the kind of friendship that keeps life fun, loud, and unforgettable.'
   },
   {
-    src: 'https://picsum.photos/seed/friendship5/600/900',
-    quote: 'Forever my favorite human.'
+    title: 'Card 5 • Favorite Human',
+    short: 'Forever my favorite human.',
+    long: 'Thank you for your kindness, your patience, and your constant presence. You truly are one of my favorite people ever.'
+  },
+  {
+    title: 'Card 6 • Birthday Promise',
+    short: 'More memories. More smiles. More years.',
+    long: 'Today is your day, and I just want you to know this bond is precious. Let’s keep making memories, always.'
   }
 ];
 
@@ -80,7 +89,7 @@ function goToPage(pageNumber) {
     current.classList.remove('active', 'exit-left');
     next.classList.add('active');
     if (pageNumber === '3') launchConfettiBurst();
-    if (pageNumber === '4') populateGallery();
+    if (pageNumber === '4') populateGreetingCards();
     if (pageNumber === '6') {
       launchFireworks();
       celebrationSound.currentTime = 0;
@@ -103,34 +112,42 @@ musicToggle.addEventListener('click', () => {
   }
 });
 
-function populateGallery() {
-  const grid = document.getElementById('galleryGrid');
+const cardModal = document.getElementById('cardModal');
+const cardModalTitle = document.getElementById('cardModalTitle');
+const cardModalMessage = document.getElementById('cardModalMessage');
+const cardModalClose = document.getElementById('cardModalClose');
+
+function openCardModal(card) {
+  cardModalTitle.textContent = card.title;
+  cardModalMessage.textContent = card.long;
+  cardModal.classList.remove('hidden');
+}
+
+cardModalClose.addEventListener('click', () => cardModal.classList.add('hidden'));
+cardModal.addEventListener('click', (e) => {
+  if (e.target === cardModal) cardModal.classList.add('hidden');
+});
+
+function populateGreetingCards() {
+  const grid = document.getElementById('cardsGrid');
   if (grid.childElementCount) return;
 
-  photoData.forEach((item) => {
-    const card = document.createElement('article');
-    card.className = 'gallery-item';
-    card.innerHTML = `<img src="${item.src}" alt="Memory photo" /><div class="gallery-quote">${item.quote}</div>`;
-    card.addEventListener('click', () => openLightbox(item));
-    grid.appendChild(card);
+  greetingCards.forEach((card) => {
+    const node = document.createElement('article');
+    node.className = 'greeting-card';
+    node.innerHTML = `
+      <div class="greeting-card-inner">
+        <div class="card-face card-front">${card.short}</div>
+        <div class="card-face card-back">Tap to read full message 💌</div>
+      </div>
+    `;
+    node.addEventListener('click', () => {
+      node.classList.add('open');
+      setTimeout(() => openCardModal(card), 320);
+    });
+    grid.appendChild(node);
   });
 }
-
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const lightboxQuote = document.getElementById('lightboxQuote');
-const lightboxClose = document.getElementById('lightboxClose');
-
-function openLightbox(item) {
-  lightboxImage.src = item.src;
-  lightboxQuote.textContent = item.quote;
-  lightbox.classList.remove('hidden');
-}
-
-lightboxClose.addEventListener('click', () => lightbox.classList.add('hidden'));
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) lightbox.classList.add('hidden');
-});
 
 function launchConfettiBurst() {
   const ctx = confettiCanvas.getContext('2d');

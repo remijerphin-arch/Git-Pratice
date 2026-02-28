@@ -1,3 +1,4 @@
+
 :root {
   --pink: #f8cfe8;
   --lavender: #d8c7ff;
@@ -66,7 +67,7 @@ body {
 .content {
   position: relative;
   z-index: 2;
-  width: min(900px, 92vw);
+  width: min(980px, 92vw);
   margin: 0 auto;
   height: 100%;
   display: flex;
@@ -129,31 +130,58 @@ h2 { font-size: clamp(1.8rem, 5vw, 3.8rem); }
   animation: rise 8s linear infinite;
 }
 
-.gallery-content h2 { text-align: center; }
-.gallery-grid {
+.cards-content h2, .cards-sub { text-align: center; }
+.cards-sub { margin-top: -8px; margin-bottom: 14px; }
+.cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 14px;
-  margin: 1.3rem 0;
+  margin: 1rem 0 1.5rem;
 }
-.gallery-item {
-  position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transform: translateY(0);
-  transition: transform .35s;
+
+.greeting-card {
+  perspective: 1000px;
+  height: 220px;
   cursor: pointer;
 }
-.gallery-item:hover { transform: translateY(-6px) scale(1.01); }
-.gallery-item img { width: 100%; height: 260px; object-fit: cover; display: block; }
-.gallery-quote {
+
+.greeting-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .6s ease;
+}
+
+.greeting-card:hover .greeting-card-inner,
+.greeting-card.open .greeting-card-inner {
+  transform: rotateY(180deg) scale(1.02);
+}
+
+.card-face {
   position: absolute;
-  inset: auto 0 0 0;
-  padding: .7rem;
-  font-size: .82rem;
-  color: white;
-  background: linear-gradient(to top, rgba(48,30,65,.85), transparent);
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.card-front {
+  background: linear-gradient(145deg, #ffdced, #e9dcff);
+  color: #663f87;
+  font-weight: 600;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #fff, #f9f2ff);
+  color: #4d2f67;
+  font-size: .95rem;
 }
 
 .lightbox {
@@ -165,7 +193,22 @@ h2 { font-size: clamp(1.8rem, 5vw, 3.8rem); }
   place-items: center;
   padding: 1rem;
 }
-.lightbox img { max-width: min(90vw, 500px); max-height: 70vh; border-radius: 16px; box-shadow: var(--shadow); }
+
+.card-modal-content {
+  width: min(560px, 92vw);
+  border-radius: 20px;
+  padding: 1.2rem 1.2rem;
+  background: linear-gradient(140deg, #fff, #f8eeff);
+  box-shadow: var(--shadow);
+  color: #4a2f63;
+}
+
+.card-modal-content h3 {
+  margin: 0 0 .7rem;
+  font-family: 'Sacramento', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
 .close-lightbox {
   position: absolute; top: 15px; right: 15px; border: none; border-radius: 50%; width: 38px; height: 38px;
   font-size: 1.4rem; cursor: pointer;
@@ -195,5 +238,5 @@ h2 { font-size: clamp(1.8rem, 5vw, 3.8rem); }
 @media (max-width: 760px) {
   body { overflow: hidden; }
   .content { justify-content: center; padding-top: 56px; }
-  .gallery-item img { height: 220px; }
+  .greeting-card { height: 190px; }
 }

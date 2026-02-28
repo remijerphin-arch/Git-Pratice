@@ -76,9 +76,10 @@
       </section>
 
       <section class="page" data-page="4">
-        <div class="content gallery-content">
-          <h2>Memory Gallery</h2>
-          <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="content cards-content">
+          <h2>Greeting Card Vault 💌</h2>
+          <p class="cards-sub">Tap any card to open a surprise note.</p>
+          <div class="cards-grid" id="cardsGrid"></div>
           <button class="next-btn" data-next="5">See Full Surprise →</button>
         </div>
       </section>
@@ -113,10 +114,12 @@
       </section>
     </main>
 
-    <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true">
-      <button id="lightboxClose" class="close-lightbox">×</button>
-      <img id="lightboxImage" alt="Memory" />
-      <p id="lightboxQuote"></p>
+    <div id="cardModal" class="lightbox hidden" role="dialog" aria-modal="true">
+      <button id="cardModalClose" class="close-lightbox">×</button>
+      <div class="card-modal-content">
+        <h3 id="cardModalTitle"></h3>
+        <p id="cardModalMessage"></p>
+      </div>
     </div>
 
     <script src="script.js"></script>
